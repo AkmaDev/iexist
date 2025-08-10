@@ -1,5 +1,5 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { FormData } from "@/app/types/types";
 // import profilePhoto from "@/assets/profile-photo.jpg";
@@ -17,7 +17,7 @@ export function CVHeader({ data }: CVHeaderProps) {
     <header className="text-center mb-12 pt-8">
       <div className="flex flex-col items-center mb-6">
         <Avatar className="w-32 h-32 mb-4 border-4 border-cv-border shadow-lg">
-          <AvatarImage src="/assets/profile-photo.jpg" alt={fullName} />
+          {/* <AvatarImage src="/assets/profile-photo.jpg" alt={fullName} /> */}
           <AvatarFallback className="text-2xl font-semibold bg-cv-accent-light text-cv-accent">
             {initials}
           </AvatarFallback>

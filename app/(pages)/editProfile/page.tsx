@@ -107,7 +107,7 @@ const DEFAULT_VALUES: FormData = {
   },
 };
 
-export default function EuropassLikeForm() {
+export default function ProfilePageEdit() {
   const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
@@ -172,90 +172,6 @@ export default function EuropassLikeForm() {
   function goToDashboard() {
     router.push("/dashboard");
   }
-
-  // useEffect(() => {
-  //   async function loadUserAndProfile() {
-  //     const { data: sessionData } = await supabase.auth.getSession();
-  //     if (!sessionData?.session) {
-  //       router.push("/login");
-  //       return;
-  //     }
-  //     const currentUser = sessionData.session.user;
-  //     setUser(currentUser);
-
-  //     // Charger le profil existant depuis la table 'profiles' (suppose : user_id, username, data json)
-  //     const { data: profileData, error } = await supabase
-  //       .from("profiles")
-  //       .select("username, data")
-  //       .eq("user_id", currentUser.id)
-  //       .single();
-
-  //     if (!error && profileData?.data) {
-  //       const profile = profileData.data as FormData;
-
-  //       // On setValue explicitement pour chaque partie (plus sûr)
-  //       if (profile.language) setValue("language", profile.language);
-  //       if (profile.dateFormat) setValue("dateFormat", profile.dateFormat);
-  //       if (profile.personalInfo)
-  //         setValue("personalInfo", profile.personalInfo);
-  //       if (profile.workExperiences)
-  //         setValue("workExperiences", profile.workExperiences);
-  //       if (profile.educationTrainings)
-  //         setValue("educationTrainings", profile.educationTrainings);
-  //       if (profile.personalSkills)
-  //         setValue("personalSkills", profile.personalSkills);
-  //     }
-
-  //     setLoading(false);
-  //   }
-
-  //   loadUserAndProfile();
-  // }, [router, setValue]);
-
-  // if (loading) return <div>Chargement...</div>;
-  // if (!user) return null;
-
-  // useEffect(() => {
-  //   async function loadUserAndProfile() {
-  //     const { data: sessionData } = await supabase.auth.getSession();
-  //     if (!sessionData?.session) {
-  //       // Pas connecté, on affiche Hero (user=null)
-  //       setUser(null);
-  //       setLoading(false);
-  //       return;
-  //     }
-
-  //     const currentUser = sessionData.session.user;
-  //     setUser(currentUser);
-
-  //     // Charger le profil s’il existe
-  //     const { data: profileData, error } = await supabase
-  //       .from("profiles")
-  //       .select("username, data")
-  //       .eq("user_id", currentUser.id)
-  //       .single();
-
-  //     if (!error && profileData?.data) {
-  //       const profile = profileData.data as FormData;
-
-  //       if (profile.language) setValue("language", profile.language);
-  //       if (profile.dateFormat) setValue("dateFormat", profile.dateFormat);
-  //       if (profile.personalInfo)
-  //         setValue("personalInfo", profile.personalInfo);
-  //       if (profile.workExperiences)
-  //         setValue("workExperiences", profile.workExperiences);
-  //       if (profile.educationTrainings)
-  //         setValue("educationTrainings", profile.educationTrainings);
-  //       if (profile.personalSkills)
-  //         setValue("personalSkills", profile.personalSkills);
-  //     }
-
-  //     setLoading(false);
-  //   }
-
-  //   loadUserAndProfile();
-  // }, [router, setValue]);
-
   useEffect(() => {
     async function loadUserAndProfile() {
       const { data: sessionData } = await supabase.auth.getSession();
@@ -278,12 +194,6 @@ export default function EuropassLikeForm() {
 
       if (!error && profileData?.data) {
         const profile = profileData.data as FormData;
-
-        // Si prénom ou nom renseigné, on redirige vers dashboard directement
-        if (profile.personalInfo.firstName || profile.personalInfo.lastName) {
-          router.push("/dashboard");
-          return; // stop la suite
-        }
 
         if (profile.language) setValue("language", profile.language);
         if (profile.dateFormat) setValue("dateFormat", profile.dateFormat);
